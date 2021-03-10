@@ -1,42 +1,6 @@
 import sys
-import hashlib
-from collections import namedtuple
-
-FileInfo = namedtuple('FileInfo', 'file, algo, hash')
-
-
-def loader(file):
-    file_list = []
-    with open(file, 'r', encoding='utf-8') as f:
-        for line in f:
-            if line:
-                file_list.append(FileInfo._make(line.split()))
-    return file_list
-
-
-def hasher(file, algo):
-    BLOCK_SIZE = 65536
-    file_hash = None
-
-    if algo == 'md5':
-        file_hash = hashlib.md5()
-
-    elif algo == 'sha1':
-        file_hash = hashlib.sha1()
-
-    elif algo == 'sha256':
-        file_hash = hashlib.sha256()
-
-    with open(file, 'rb') as f:
-        if file_hash:
-            fb = f.read(BLOCK_SIZE)
-            while len(fb) > 0:
-                file_hash.update(fb)
-                fb = f.read(BLOCK_SIZE)
-
-            file_hash = file_hash.hexdigest()
-
-    return file_hash
+from load_file import loader
+from hash import hasher
 
 
 def main(file, dir):
@@ -69,3 +33,4 @@ if __name__ == '__main__':
             directory = directory[:-1]
 
         main(input_file, directory)
+
