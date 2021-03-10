@@ -6,4 +6,4 @@
 целостность файлов.
 
 Пример вызова:
-hash_checker.py 'path to the input file' 'path to the directory containing the files to check'
+hash_check.py 'path to the input file' 'path to the directory containing the files to check'
